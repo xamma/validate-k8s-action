@@ -33,7 +33,9 @@ jobs:
       - name: Setup kubeconfig
         if: ${{ inputs.kubeconfig != '' }}
         run: |
+          mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG_DATA }}" | base64 -d > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
 
       # Step 3: Use validate k8s action
       - name: Validate K8s manifests
