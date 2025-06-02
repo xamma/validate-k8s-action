@@ -31,7 +31,7 @@ jobs:
 
       # Step 2: Setup own cluster kubecon (optional)
       - name: Setup kubeconfig
-        if: ${{ inputs.kubeconfig != '' }}
+        if: ${{ secrets.KUBECONFIG_DATA != '' }}
         run: |
           mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG_DATA }}" | base64 -d > $HOME/.kube/config
