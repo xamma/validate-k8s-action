@@ -1,0 +1,21 @@
+name: "Validate Kubernetes Resources"
+description: "Validate Kubernetes manifests or Helm charts using K3s"
+
+inputs:
+  folder:
+    description: "Path to manifests or Helm chart"
+    required: true
+  type:
+    description: "Type of resource: manifest or helm"
+    required: true
+  namespace:
+    description: "Namespace to install/validate into"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - run: bash ${{ github.action_path }}/install-k3s.sh
+      shell: bash
+    - run: bash ${{ github.action_path }}/validate.sh "${{ inputs.folder }}" "${{ inputs.type }}" "${{ inputs.namespace }}"
+      shell: bash
