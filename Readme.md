@@ -39,7 +39,7 @@ jobs:
 
       # Step 3: Use validate k8s action
       - name: Validate K8s manifests
-        uses: xamma/validate-k8s-action@v1.0.0
+        uses: xamma/validate-k8s-action@v1.0.1
         with:
           folder: ./k8s-manifests  # relative Path to your chart directory
           type: manifest  # type
