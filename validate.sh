@@ -4,8 +4,13 @@ set -e
 FOLDER="$1"
 TYPE="$2"
 NAMESPACE="$3"
+KUBECONFIG_PATH="$4"
 
-export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+if [[ -n "$KUBECONFIG_PATH" ]]; then
+  export KUBECONFIG="$KUBECONFIG_PATH"
+else
+  export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+fi
 
 if [[ "$TYPE" == "manifest" ]]; then
   echo "Validating Kubernetes manifests in $FOLDER"

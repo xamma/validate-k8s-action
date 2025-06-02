@@ -12,10 +12,10 @@ fi
 
 for i in {1..30}; do
   if kubectl get nodes &>/dev/null; then
-    echo "✅ K3s is ready."
+    echo "K3s is ready."
     break
   fi
-  echo "⏳ Waiting for K3s to be ready..."
+  echo "Waiting for K3s to be ready..."
   sleep 2
 done
 

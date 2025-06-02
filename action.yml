@@ -9,13 +9,18 @@ inputs:
     description: "Type of resource: manifest or helm"
     required: true
   namespace:
-    description: "Namespace to install/validate into"
-    required: true
+    description: "Namespace to install/validate into (optional)"
+    required: false
+    default: default
+  kubeconfig:
+    description: "Path to kubeconfig file for external cluster (optional)"
+    required: false
 
 runs:
   using: "composite"
   steps:
     - run: bash ${{ github.action_path }}/install-k3s.sh
+      if: ${{ !inputs.kubeconfig }}
       shell: bash
-    - run: bash ${{ github.action_path }}/validate.sh "${{ inputs.folder }}" "${{ inputs.type }}" "${{ inputs.namespace }}"
+    - run: bash ${{ github.action_path }}/validate.sh "${{ inputs.folder }}" "${{ inputs.type }}" "${{ inputs.namespace }}" "${{ inputs.kubeconfig }}"
       shell: bash
